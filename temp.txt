@@ -1,24 +1,24 @@
 B1: Cài minikube
 sudo apt-get update && sudo apt-get upgrade -y
 
-Cài đặt các công cụ cần thiết:
+B2: Cài đặt các công cụ cần thiết:
 sudo apt-get install -y apt-transport-https curl
 
-Cài đặt Docker (Minikube yêu cầu Docker để chạy):
+B3: Cài đặt Docker (Minikube yêu cầu Docker để chạy):
 sudo apt-get install -y docker.io
 sudo systemctl enable docker
 sudo systemctl start docker
 
-Tải và cài đặt Minikube:
+B4: Tải và cài đặt Minikube:
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
-Tải và cài đặt Kubectl:
+B5: Tải và cài đặt Kubectl:
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 
-Khởi động Minikube:
-minikube start --driver=docker
+B6: Khởi động Minikube:
+minikube start --driver=docker --memory=4096 --cpus=4
 
-Kiểm tra trạng thái của Minikube:
+B7: Kiểm tra trạng thái của Minikube:
 minikube status
