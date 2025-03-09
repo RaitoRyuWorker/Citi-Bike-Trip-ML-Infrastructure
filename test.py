@@ -1,23 +1,15 @@
 import boto3
 from botocore.client import Config
+import requests
 
-# Cấu hình MinIO
-minio_url = "http://192.168.49.2:30000"  # Thay bằng URL từ `minikube service`
-access_key = "admin"
-secret_key = "password"
-bucket_name = "raw-data"
 
-# Kết nối MinIO
-s3_client = boto3.client('s3',
-    endpoint_url=minio_url,
-    aws_access_key_id=access_key,
-    aws_secret_access_key=secret_key,
-    config=Config(signature_version='s3v4')
-)
+url = "https://s3.amazonaws.com/tripdata/JC-202502-citibike-tripdata.csv.zip"
+local_path = "data/citibike/JC-202502-citibike-tripdata.csv.zip"
 
-# Tạo bucket nếu chưa có
-# s3_client.create_bucket(Bucket=bucket_name)
-
-# Upload file thử nghiệm
-s3_client.upload_file("temp.txt", bucket_name, "temp.txt")
-print("Uploaded successfully!")
+response = requests.get(url, stream=True)
+print(response.status_code)
+if response.status_code == 200:
+    with open(local_path, 'wb') as f:
+        for chunk in response.iter_content(1024):
+            f.write(chunk)
+    print(f"Downloaded {local_path}")

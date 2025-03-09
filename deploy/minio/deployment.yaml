@@ -19,7 +19,7 @@ spec:
         - server
         - /data
         - --console-address
-        - ":9001"  # Port cho WebUI (thêm để tránh trùng 9000)
+        - ":9001"  # Port for WebUI
         ports:
         - containerPort: 9000  # API
         - containerPort: 9001  # WebUI
