@@ -22,3 +22,8 @@ minikube start --driver=docker --memory=4096 --cpus=4
 
 B7: Kiểm tra trạng thái của Minikube:
 minikube status
+
+#####Trước khi deploy prometheus và grafana
+minikube addons enable metrics-server
+kubectl get pods -n kube-system | grep metrics-server
+kubectl create namespace monitoring
